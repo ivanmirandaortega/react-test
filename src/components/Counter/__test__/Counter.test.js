@@ -72,3 +72,33 @@ test("click on subtract button subtracts one from counter", () => {
   fireEvent.click(subtractBtnEl);
   expect(counterEl.textContent).toBe("-1");
 });
+
+test("changing inout value then clicking on add button works correctly", () => {
+  const { getByTestId } = render(<Counter />);
+  const addBtnEl = getByTestId("add-btn");
+  const counterEl = getByTestId("counter");
+  const inputEl = getByTestId("input");
+
+  fireEvent.change(inputEl, {
+    target: {
+      value: "5",
+    },
+  });
+  fireEvent.click(addBtnEl);
+  expect(counterEl.textContent).toBe("5");
+});
+
+test("changing inout value then clicking on subtract button works correctly", () => {
+  const { getByTestId } = render(<Counter />);
+  const subtractBtnEl = getByTestId("subtract-btn");
+  const counterEl = getByTestId("counter");
+  const inputEl = getByTestId("input");
+
+  fireEvent.change(inputEl, {
+    target: {
+      value: "5",
+    },
+  });
+  fireEvent.click(subtractBtnEl);
+  expect(counterEl.textContent).toBe("-5");
+});
